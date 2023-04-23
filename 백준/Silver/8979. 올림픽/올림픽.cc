@@ -21,7 +21,7 @@ int compare(const void *first, const void *second) {
 }
 
 int main() {
-  int n, k, cnt = 0, score[1001] = {0}, check, cnt2 = 1;
+  int n, k, score[1001] = {0}, check, cnt2 = 1;
   list olym[1001];
   scanf("%d %d", &n, &k);
   for (int i = 0; i < n; i++) {
@@ -40,8 +40,8 @@ int main() {
       cnt2 = i +2;
     }
 
-    if (olym[i].num == k) {
-      check = i;
+    if (olym[i+1].num == k) {
+      check = i+1;
       break;
     }
   }
@@ -50,3 +50,4 @@ int main() {
 
   return 0;
 }
+
