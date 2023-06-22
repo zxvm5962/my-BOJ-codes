@@ -1,55 +1,42 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <algorithm>
+#include <iostream>
+#include <vector>
 
-int static compare(const void *first, const void *second) {
-  if (*(int *)first > *(int *)second)
-    return 1;
-  else if (*(int *)first < *(int *)second)
-    return -1;
-  else
-    return 0;
-}
+using namespace std;
 
+vector<int> v;
 int main() {
-  long n, m;
-  long long sum = 0;
-  scanf("%ld %ld", &n, &m);
-  long tree[n];
-  for (long i = 0; i < n; i++) {
-    scanf("%ld", &tree[i]);
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+  int n, m, num;
+  cin >> n >> m;
+  for (int i = 0; i < n; i++) {
+    cin >> num;
+    v.push_back(num);
   }
+  sort(v.begin(), v.end());
 
-  qsort(tree, sizeof(tree) / sizeof(long), sizeof(long), compare);
-
-  long fi, la, mid, check = 0;
-  fi = 0, la = tree[n - 1];
-
-  while (fi <= la) {
+  long long sum = 0, result;
+  int start = 0, end = v[n - 1], mid;
+  while (start <= end) {
+    mid = (start + end) / 2;
     sum = 0;
-    mid = (la + fi) / 2;
-
-    for (long i = 0; i < n; i++) {
-      if (tree[i] > mid) {
-        sum += tree[i] - mid;
-      }
+    for (int i = 0; i < n; i++) {
+      if (v[i] - mid > 0)
+        sum += (v[i] - mid);
     }
-    if (sum < m) {
-      la = mid-1;
-    } 
-    else if (sum > m) {
-      if (check < mid) {
-        check = mid;
-      }
-      fi = mid+1;
-
-    } 
+    if (sum > m) {
+      start = mid + 1;
+      result = mid;
+    } else if (sum < m)
+      end = mid - 1;
     else {
-      check = mid;
+      result = mid;
       break;
     }
   }
-
-  printf("%ld", check);
+  cout << result;
 
   return 0;
 }
