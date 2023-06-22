@@ -1,28 +1,25 @@
-#include <stdio.h>
+#include <algorithm>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> v;
 
 int main() {
-  int a, b, c, sum = 0, sum2 = 0, temp = 0;
-  int time[1001] = {0}, arr[1001] = {0};
-  scanf("%d ", &a);
-  for (int i = 0; i < a; i++) {
-    scanf("%d", &time[i]);
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+  int t, num, sum = 0, psum = 0;
+  cin >> t;
+  for(int i=0; i<t;i++){
+    cin >> num;
+    v.push_back(num);
   }
-  for (int i = 0; i < a; i++) {
-    for (int j = i; j < a; j++) {
-      if (time[i] > time[j]) {
-        temp = time[i];
-        time[i] = time[j];
-        time[j] = temp;
-      }
-    }
+  sort(v.begin(),v.end());
+  for(int i=0; i<t;i++){
+    sum += v[i];
+    psum += sum;
   }
-  for (int i = 0; i < a; i++) {
-    sum += time[i];
-    arr[i] = sum;
-  }
-  for (int i = 0; i < a; i++) {
-    sum2 += arr[i];
-  }
-  printf("%d",sum2);
-  return 0;
+  cout << psum;
+
 }
