@@ -1,25 +1,30 @@
-#include <stdio.h>
-#define max(a, b) a > b ? a : b
+#include <algorithm>
+#include <iostream>
 
-int dp[102][100002] = {0};
+using namespace std;
+
+int bag[101][100001];
 
 int main() {
-  int n, k;
-  int v[102] = {0}, l[102] = {0};
-  scanf("%d %d", &n, &k);
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
 
-  for (int i = 1; i <= n; i++) {
-    scanf("%d %d", &l[i], &v[i]);
-  }
+  int n, k; // k = 최대 무게
+  int w, v;
 
+  cin >> n >> k;
   for (int i = 1; i <= n; i++) {
+    cin >> w >> v;
     for (int j = 1; j <= k; j++) {
-      if (j - l[i] >= 0) { //무게보다 적음, 가능
-        dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - l[i]] + v[i]);
-      } else
-        dp[i][j] = dp[i - 1][j];
+      if (j - w >= 0) {
+        bag[i][j] = max(bag[i - 1][j - w] + v, bag[i-1][j]);
+      }
+      else
+        bag[i][j] = bag[i-1][j];
     }
   }
-  printf("%d", dp[n][k]);
+  cout << bag[n][k];
+
   return 0;
 }
