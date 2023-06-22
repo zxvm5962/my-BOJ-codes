@@ -1,21 +1,22 @@
-#include <stdio.h>
+#include <algorithm>
+#include <iostream>
+#include <vector>
+using namespace std;
 
+long long dp[101];
 int main() {
-  int t, n;
-  long long arr[101] = {0};
-  scanf("%d", &t);
-  for (int i = 0; i < t; i++) {
-    scanf("%d", &n);
-    arr[0] = 1, arr[1] = 1, arr[2] = 1, arr[3] = 2, arr[4] = 2;
-    if (n > 4) {
-      for (int k = 0; k < n - 4; k++) {
-        arr[k + 5] = arr[k] + arr[k + 4];
-      }
-      printf("%lld\n", arr[n - 1]);
-    } 
-    else
-      printf("%lld\n", arr[n-1]);
-  }
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
 
-  return 0;
+  int t, n;
+  cin >> t;
+  dp[1] = 1, dp[2] = 1,dp[3] = 1;
+  for(int i=4;i<101;i++){
+    dp[i] = dp[i-2]+ dp[i-3];
+  }
+  while(t--){
+    cin >> n;
+    cout << dp[n] << "\n";
+  }
 }
