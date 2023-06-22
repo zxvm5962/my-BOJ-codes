@@ -6,7 +6,7 @@ typedef struct {
   int y;
 } con;
 
-int compare(const void *first, const void *second) {
+int compare(const void* first, const void* second) {
   con a = *(con *)first;
   con b = *(con *)second;
   if (a.y == b.y) {
@@ -14,8 +14,8 @@ int compare(const void *first, const void *second) {
   } else
     return a.y - b.y;
 }
-int compare2(const void *first, const void *second) {
-  return *(int *)first - *(int *)second;
+int compare2(const void* first, const void* second) {
+  return *(int*)first - *(int*)second;
 }
 
 int main() {
@@ -35,9 +35,8 @@ int main() {
       day++;
       now[cnt] = list[i].x;
       cnt++;
-    } 
-    else if (list[i].y < day) { // list[i].y 가 day 값보다 작으면 비교
-      qsort(now, cnt, sizeof(int), compare2);// now 오름차순
+    } else if (list[i].y < day) { // list[i].y 가 day 값보다 작으면 비교
+      qsort(now, cnt, sizeof(int), compare2); // now 오름차순
       temp = sum - now[0] + list[i].x;
       if (sum < temp) {
         sum = temp;
@@ -49,4 +48,3 @@ int main() {
 
   return 0;
 }
-
