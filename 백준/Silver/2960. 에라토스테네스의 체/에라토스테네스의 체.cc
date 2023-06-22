@@ -1,22 +1,28 @@
-#include <stdio.h>
+#include <algorithm>
+#include <iostream>
+
+using namespace std;
+int arr[1001];
 
 int main() {
-  int n, k, cnt = 0, num[1001] = {0};
-  int result;
-  scanf("%d %d", &n, &k);
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+
+  int n, cnt = 0, k;
+  cin >> n >> k;
   for (int i = 2; i <= n; i++) {
     for (int j = 1; i * j <= n; j++) {
-      if (num[i * j] == 0) {
-        num[i * j] = 1;
+      if (arr[i * j] == 0) {
+        arr[i * j] = 1;
         cnt++;
       }
       if (cnt == k) {
-        result = i * j;
-        goto fin;
+        printf("%d", i * j);
+        return 0;
       }
     }
   }
-  fin : printf("%d", result);
 
   return 0;
 }
