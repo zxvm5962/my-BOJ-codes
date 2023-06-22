@@ -1,28 +1,42 @@
+#include <algorithm>
+#include <cstring>
 #include <iostream>
-#include <map>
+#include <vector>
+
 using namespace std;
 
-int main(){
-    cin.tie(NULL);
-    ios::sync_with_stdio(false);
+vector<pair<string, string>> v;
 
-    int n,m;
-    map<string,string> M;
-    string a,b;
-
-    cin >> n >> m;
-
-    for(int i=0;i<n;i++){
-        cin >> a >> b;
-
-        M[a] = b;
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+  int n, m;
+  string str1, str2;
+  cin >> n >> m;
+  for (int i = 0; i < n; i++) {
+    cin >> str1 >> str2;
+    v.push_back({str1, str2});
+  }
+  sort(v.begin(), v.end());
+  string key;
+  for (int i = 0; i < m; i++) {
+    cin >> key;
+    int start = 0, end = n - 1;
+    int result;
+    while (start <= end) {
+      int mid = (start + end) / 2;
+      if (key < v[mid].first)
+        end = mid - 1;
+      else if (key > v[mid].first)
+        start = mid + 1;
+      else {
+        result = mid;
+        break;
+      }
     }
+    cout << v[result].second << "\n";
+  }
 
-    for(int i=0;i<m;i++){
-        cin >> a;
-
-        cout << M[a] << '\n';
-
-    }
-    return 0;
+  return 0;
 }
