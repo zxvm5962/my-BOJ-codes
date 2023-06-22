@@ -1,18 +1,26 @@
-#include <stdio.h>
+#include <algorithm>
+#include <iostream>
 
+using namespace std;
+
+int coin[11];
 int main() {
-  int n, m, num, coin[11], total = 0;
-  scanf("%d %d", &n, &m);
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
 
-  for (int i = n - 1; i >= 0; i--) {
-    scanf("%d", &coin[i]);
+  int n, m, sum = 0;
+  cin >> n >> m;
+  for (int i = 0; i < n; i++) {
+    cin >> coin[i];
   }
-  int i = 0;
+  int i = n - 1, num;
   while (m > 0) {
-    total += (m / coin[i]);
-    m -= coin[i] * (m / coin[i]);
-    i++;
+    num = m/coin[i];
+    m -= num * coin[i];
+    sum += num;
+    i--;
   }
-  printf("%d", total);
+  cout << sum;
   return 0;
 }
