@@ -1,26 +1,21 @@
-#include <stdio.h>
+#include <algorithm>
+#include <iostream>
+
+using namespace std;
 
 long long dp[91];
-
-long long pinary(int n) {
-  if (n == 1)
-    return 1;
-  else if (n == 2)
-    return 1;
-  else {
-    dp[1] = 1;
-    dp[2] = 1;
-    for (int i = 3; i <= n; i++) {
-      dp[i] = dp[i - 2] + dp[i - 1];
-    }
-  }
-  return dp[n];
-}
 int main() {
-  int n;
-  scanf("%d", &n);
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+  int t;
+  cin >> t;
+  dp[1] = 1;
+  dp[2] = 1;
+  for(int i=3;i<91;i++){
+    dp[i]= dp[i-1] + dp[i-2];
+  }
 
-  printf("%lld", pinary(n));
+  cout << dp[t];
 
-  return 0;
 }
