@@ -1,25 +1,28 @@
-#include <stdio.h>
+#include <algorithm>
+#include <iostream>
+#include <vector>
 
+using namespace std;
+
+int arr[100001];
 int main() {
-  int n,m,num,arr[100001] = {0};
-  long sum[100001] = {0};
-  scanf("%d %d",&n,&m);
-  for(int i=0;i<n;i++){
-    scanf("%d",&num);
-    arr[i] = num;
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+  int n, m, num, sum = 0;
+  cin >> n >> m;
+  for (int i = 1; i <= n; i++) {
+    cin >> num;
+    sum += num;
+    arr[i]  = sum;
   }
-  sum[0] = arr[0];
-  for (int i=0;i<n;i++){
-    sum[i+1] = sum[i] + arr[i+1];
-  }
-  
-  int range1,range2;
-  long result;
-  for(int i=0;i<m;i++){
-    scanf("%d %d",&range1,&range2);
-    result = sum[range2-1] - sum[range1-1] + arr[range1-1];
-    printf("%ld\n",result);
+  int s, e;
+  for (int i = 0; i < m; i++) {
+    cin >> s >> e;
+    int result = arr[e] - arr[s-1];
+    cout << result << "\n";
   }
   
+
   return 0;
 }
