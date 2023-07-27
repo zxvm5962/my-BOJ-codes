@@ -1,30 +1,29 @@
-#include <stdio.h>
-#include <string.h>
+#include <algorithm>
+#include <iostream>
+#include <vector>
 
-char str[1000001];
-char io[1000002] = {0};
+using namespace std;
+
 int main() {
-  int n,m,result = 0;
-  unsigned long cnt;
-  io[0] = 'I';
-  scanf("%d %d",&n,&m);
-  for(int i=1;i<2*n;i+=2){
-    io[i] = 'O';
-    io[i+1] = 'I';
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+  int n, m;
+  cin >> n >> m;
+  string ioi = "I", add = "OI";
+  for (int i = 0; i < n; i++) {
+    ioi += add;
   }
-  scanf("%s",str);
 
-  for(int i=0;i<=strlen(str)-strlen(io);i++){
-    cnt = 0;
-    for(int j=0;j<strlen(io);j++){
-      if(str[i+j] == io[j])
-        cnt++;
-    }
-    if(cnt == strlen(io))
-      result++;
+  string str;
+  int cnt = 0;
+  cin >> str;
+  for (int i = 0; i <= m - ioi.length(); i++) {
+    string CompStr = str.substr(i, ioi.length());
+    if (CompStr == ioi)
+      cnt++;
   }
-  printf("%d",result);
+  cout << cnt;
   
   return 0;
 }
-
