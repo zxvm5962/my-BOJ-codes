@@ -23,11 +23,6 @@ int main()
     double a, b = 0;
 
     cin >> t;
-    if (t == 1)
-    {
-        cout << "*";
-        return 0;
-    }
     for (int i = 0; i < t; i++)
     {
         for (int j = t; j > i + 1; j--)
